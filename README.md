@@ -128,8 +128,9 @@ export PATH="/Users/$USER/.local/bin:$PATH"
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/langchain-ai/deep_research_from_scratch
-cd deep_research_from_scratch
+git clone https://github.com/ipsiitaaa-source/Batch-13-Designing-an-Autonomous-Learning-Agent-with-Checkpoint-Verification-and-Feynman-Pedagogy.git
+
+cd Batch-13-Designing-an-Autonomous-Learning-Agent-with-Checkpoint-Verification-and-Feynman-Pedagogy
 ```
 
 2. Install the package and dependencies (this automatically creates and manages the virtual environment):
@@ -149,7 +150,7 @@ Add your API keys to the `.env` file:
 TAVILY_API_KEY=your_tavily_api_key_here
 
 # Required for Google Gemini models
-GOOGLE_API_KEY=your_google_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
 
 # Optional: For LangSmith tracing
 LANGSMITH_TRACING=true
@@ -294,4 +295,5 @@ This repo contains 5 tutorial notebooks that build a deep research system from s
 - **Protocol Integration**: MCP servers and tool ecosystems
 
 Each notebook builds on the previous concepts, culminating in a production-ready deep research system that can handle complex, multi-faceted research queries with intelligent scoping and coordinated execution. 
+
 
