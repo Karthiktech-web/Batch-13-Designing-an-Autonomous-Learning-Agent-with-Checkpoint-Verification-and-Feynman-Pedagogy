@@ -1,299 +1,173 @@
+# 🧠 Autonomous Learning Agent using LangGraph
 
-##  Quickstart 
+## 📌 Project Overview
 
-### Option 1: Docker (Recommended)
+This project was implemented as part of the **Infosys Springboard Internship**.
+It demonstrates the design and execution of an **Autonomous AI Learning Agent** capable of performing structured reasoning, research, and explanation using LangGraph.
 
-The fastest way to get started is using Docker. This includes all dependencies (Python 3.11, Node.js, uv) pre-configured.
+The system follows an intelligent workflow that mimics human learning:
+➡️ Understanding → Research → Explanation
 
-#### Prerequisites
-- [Docker](https://docs.docker.com/get-docker/) installed on your system
-- [Docker Compose](https://docs.docker.com/compose/install/) (usually included with Docker Desktop)
+---
 
-#### Quick Start
+## 🎯 Objective
 
-1. **Clone the repository:**
-```bash
-git clone https://github.com/ipsiitaaa-source/Batch-13-Designing-an-Autonomous-Learning-Agent-with-Checkpoint-Verification-and-Feynman-Pedagogy.git
+The main goal of this project is to build an AI agent that:
 
-cd Batch-13-Designing-an-Autonomous-Learning-Agent-with-Checkpoint-Verification-and-Feynman-Pedagogy
+* Understands user queries clearly
+* Performs step-by-step reasoning
+* Collects relevant information
+* Generates structured and easy-to-understand outputs
+
+---
+
+## 🧠 System Architecture
+
+The system is based on a **3-stage pipeline**:
+
+### 1. Scope Phase
+
+* Analyzes user input
+* Identifies missing details
+* Refines the problem statement
+
+### 2. Research Phase
+
+* Uses tools/APIs for data collection
+* Performs iterative reasoning
+* Processes intermediate results
+
+### 3. Write Phase
+
+* Generates final structured output
+* Uses Feynman technique (simple explanation)
+
+---
+
+## ⚙️ Key Features
+
+* 🔹 Multi-step AI reasoning
+* 🔹 Autonomous decision-making workflow
+* 🔹 API-based execution using FastAPI
+* 🔹 Thread-based state management
+* 🔹 Structured outputs using LangGraph
+* 🔹 Real-time execution monitoring
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose                |
+| ---------- | ---------------------- |
+| Python     | Core programming       |
+| LangGraph  | Workflow orchestration |
+| LangChain  | Agent + tools          |
+| FastAPI    | Backend API            |
+| Docker     | Containerization       |
+| GitHub     | Version control        |
+
+---
+
+## 🚀 Implementation Steps
+
+### Step 1: Clone Repository
+
+```bash id="a1"
+git clone <your-repo-link>
+cd Autonomous-Learning-Agent
 ```
 
-2. **Create a `.env` file** with your API keys:
-```bash
-# Create .env file (or copy from .env.example)
+---
+
+### Step 2: Setup Environment Variables
+
+```bash id="a2"
 cp .env.example .env
 ```
 
-Edit `.env` and add your API keys:
-```env
-# Required for research agents with external search
-TAVILY_API_KEY=your_tavily_api_key_here
+Add your API keys:
 
-# Required for Google Gemini models
-GROQ_API_KEY=your_groq_api_key_here
-
-# Optional: For LangSmith tracing
-LANGSMITH_TRACING=true
-LANGSMITH_PROJECT=deep_research_from_scratch
-```
-
-3. **Build and run the Docker container:**
-```bash
-# Build the image (first time only, or after changes)
-docker-compose build
-
-# Start the container
-docker-compose up -d
-```
-
-4. **Access the services:**
-
-| Service | URL |
-|---------|-----|
-| **LangGraph Studio** | https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:8000  |
-| **API Documentation** | http://127.0.0.1:8000/docs |
-| **API Root** | http://127.0.0.1:8000 |
-
-5. **View logs:**
-```bash
-docker-compose logs -f
-```
-
-6. **Stop the container:**
-```bash
-docker-compose down
-```
-
-#### Docker Commands Reference
-
-```bash
-# Build the image
-docker-compose build
-
-# Build without cache (after Dockerfile changes)
-docker-compose build --no-cache
-
-# Start in detached mode
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop containers
-docker-compose down
-
-# Stop and remove volumes
-docker-compose down -v
-
-# Rebuild and restart
-docker-compose down && docker-compose build && docker-compose up -d
+```env id="a3"
+TAVILY_API_KEY=your_api_key
+GROQ_API_KEY=your_api_key
 ```
 
 ---
 
-### Option 2: Local Installation
+### Step 3: Run the Application
 
-If you prefer to run without Docker, follow these steps:
-
-#### Prerequisites
-
-- **Node.js and npx** (required for MCP server in notebook 3):
-```bash
-# Install Node.js (includes npx)
-# On macOS with Homebrew:
-brew install node
-
-# On Ubuntu/Debian:
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Verify installation:
-node --version
-npx --version
+```bash id="a4"
+docker-compose up
 ```
-
-- Ensure you're using Python 3.11 or later.
-- This version is required for optimal compatibility with LangGraph.
-```bash
-python3 --version
-```
-- [uv](https://docs.astral.sh/uv/) package manager
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-# Update PATH to use the new uv version
-export PATH="/Users/$USER/.local/bin:$PATH"
-```
-
-#### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/ipsiitaaa-source/Batch-13-Designing-an-Autonomous-Learning-Agent-with-Checkpoint-Verification-and-Feynman-Pedagogy.git
-
-cd Batch-13-Designing-an-Autonomous-Learning-Agent-with-Checkpoint-Verification-and-Feynman-Pedagogy
-```
-
-2. Install the package and dependencies (this automatically creates and manages the virtual environment):
-```bash
-uv sync
-```
-
-3. Create a `.env` file in the project root with your API keys:
-```bash
-# Create .env file
-touch .env
-```
-
-Add your API keys to the `.env` file:
-```env
-# Required for research agents with external search
-TAVILY_API_KEY=your_tavily_api_key_here
-
-# Required for Google Gemini models
-GROQ_API_KEY=your_groq_api_key_here
-
-# Optional: For LangSmith tracing
-LANGSMITH_TRACING=true
-LANGSMITH_PROJECT=deep_research_from_scratch
-```
-
-4. Run the LangGraph server:
-```bash
-uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev --allow-blocking
-```
-
-5. Or run notebooks using uv:
-```bash
-# Run Jupyter notebooks directly
-uv run jupyter notebook
-
-# Or activate the virtual environment if preferred
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-jupyter notebook
-```
-
-## Background  
-
-Research is an open‑ended task; the best strategy to answer a user request can’t be easily known in advance. Requests can require different research strategies and varying levels of search depth. Consider this request. 
-
-[Agents](https://langchain-ai.github.io/langgraph/tutorials/workflows/#agent) are well suited to research because they can flexibly apply different strategies, using intermediate results to guide their exploration. Open deep research uses an agent to conduct research as part of a three step process:
-
-1. **Scope** – clarify research scope
-2. **Research** – perform research
-3. **Write** – produce the final report
-
-## 📝 Organization 
-
-This repo contains 5 tutorial notebooks that build a deep research system from scratch:
-
-### 📚 Tutorial Notebooks
-
-#### 1. User Clarification and Brief Generation (`notebooks/1_scoping.ipynb`)
-**Purpose**: Clarify research scope and transform user input into structured research briefs
-
-**Key Concepts**:
-- **User Clarification**: Determines if additional context is needed from the user using structured output
-- **Brief Generation**: Transforms conversations into detailed research questions
-- **LangGraph Commands**: Using Command system for flow control and state updates
-- **Structured Output**: Pydantic schemas for reliable decision making
-
-**Implementation Highlights**:
-- Two-step workflow: clarification → brief generation
-- Structured output models (`ClarifyWithUser`, `ResearchQuestion`) to prevent hallucination
-- Conditional routing based on clarification needs
-- Date-aware prompts for context-sensitive research
-
-**What You'll Learn**: State management, structured output patterns, conditional routing
 
 ---
 
-#### 2. Research Agent with Custom Tools (`notebooks/2_research_agent.ipynb`)
-**Purpose**: Build an iterative research agent using external search tools
+### Step 4: Access API Interface
 
-**Key Concepts**:
-- **Agent Architecture**: LLM decision node + tool execution node pattern
-- **Sequential Tool Execution**: Reliable synchronous tool execution
-- **Search Integration**: Tavily search with content summarization
-- **Tool Execution**: ReAct-style agent loop with tool calling
-
-**Implementation Highlights**:
-- Synchronous tool execution for reliability and simplicity
-- Content summarization to compress search results
-- Iterative research loop with conditional routing
-- Rich prompt engineering for comprehensive research
-
-**What You'll Learn**: Agent patterns, tool integration, search optimization, research workflow design
+* Swagger UI: http://localhost:8000/docs
+* API Base: http://localhost:8000
 
 ---
 
-#### 3. Research Agent with MCP (`notebooks/3_research_agent_mcp.ipynb`)
-**Purpose**: Integrate Model Context Protocol (MCP) servers as research tools
+## 🔄 Workflow Execution (What I Performed)
 
-**Key Concepts**:
-- **Model Context Protocol**: Standardized protocol for AI tool access
-- **MCP Architecture**: Client-server communication via stdio/HTTP
-- **LangChain MCP Adapters**: Seamless integration of MCP servers as LangChain tools
-- **Local vs Remote MCP**: Understanding transport mechanisms
+During execution, the following steps were performed:
 
-**Implementation Highlights**:
-- `MultiServerMCPClient` for managing MCP servers
-- Configuration-driven server setup (filesystem example)
-- Rich formatting for tool output display
-- Async tool execution required by MCP protocol (no nested event loops needed)
-
-**What You'll Learn**: MCP integration, client-server architecture, protocol-based tool access
+1. Created an Assistant
+2. Created a Thread
+3. Executed Runs
+4. Monitored Run Status
+5. Retrieved Final Output
 
 ---
 
-#### 4. Research Supervisor (`notebooks/4_research_supervisor.ipynb`)
-**Purpose**: Multi-agent coordination for complex research tasks
+## 📊 Sample Output
 
-**Key Concepts**:
-- **Supervisor Pattern**: Coordination agent + worker agents
-- **Parallel Research**: Concurrent research agents for independent topics using parallel tool calls
-- **Research Delegation**: Structured tools for task assignment
-- **Context Isolation**: Separate context windows for different research topics
-
-**Implementation Highlights**:
-- Two-node supervisor pattern (`supervisor` + `supervisor_tools`)
-- Parallel research execution using `asyncio.gather()` for true concurrency
-- Structured tools (`ConductResearch`, `ResearchComplete`) for delegation
-- Enhanced prompts with parallel research instructions
-- Comprehensive documentation of research aggregation patterns
-
-**What You'll Learn**: Multi-agent patterns, parallel processing, research coordination, async orchestration
+* Successfully executed AI workflow
+* Generated structured response on topic: *Machine Learning*
+* Maintained thread-based state
+* Completed run with **status: success**
 
 ---
 
-#### 5. Full Multi-Agent Research System (`notebooks/5_full_agent.ipynb`)
-**Purpose**: Complete end-to-end research system integrating all components
+## 📈 Results
 
-**Key Concepts**:
-- **Three-Phase Architecture**: Scope → Research → Write
-- **System Integration**: Combining scoping, multi-agent research, and report generation
-- **State Management**: Complex state flow across subgraphs
-- **End-to-End Workflow**: From user input to final research report
+The system:
 
-**Implementation Highlights**:
-- Complete workflow integration with proper state transitions
-- Supervisor and researcher subgraphs with output schemas
-- Final report generation with research synthesis
-- Thread-based conversation management for clarification
-
-**What You'll Learn**: System architecture, subgraph composition, end-to-end workflows
+* Successfully performs autonomous reasoning
+* Handles multi-step workflows
+* Produces clear and structured explanations
+* Demonstrates practical AI agent behavior
 
 ---
 
-### 🎯 Key Learning Outcomes
+## 🎓 Learning Outcomes
 
-- **Structured Output**: Using Pydantic schemas for reliable AI decision making
-- **Async Orchestration**: Strategic use of async patterns for parallel coordination vs synchronous simplicity
-- **Agent Patterns**: ReAct loops, supervisor patterns, multi-agent coordination
-- **Search Integration**: External APIs, MCP servers, content processing
-- **Workflow Design**: LangGraph patterns for complex multi-step processes
-- **State Management**: Complex state flows across subgraphs and nodes
-- **Protocol Integration**: MCP servers and tool ecosystems
+* Understood **LangGraph architecture**
+* Learned **Agent-based system design**
+* Worked with **REST APIs and endpoints**
+* Gained experience in **Docker-based deployment**
+* Improved understanding of **AI workflow execution**
 
-Each notebook builds on the previous concepts, culminating in a production-ready deep research system that can handle complex, multi-faceted research queries with intelligent scoping and coordinated execution. 
+---
 
+## ⚠️ Challenges Faced
 
+* Understanding API flow (Assistants → Threads → Runs)
+* Managing environment variables
+* Handling errors in API requests
+* Debugging Docker execution
+
+---
+
+## 📌 Conclusion
+
+This project demonstrates how AI agents can simulate human-like learning and reasoning processes using structured workflows.
+
+It provides hands-on experience in building intelligent systems using modern AI frameworks like LangGraph.
+
+---
+
+## 📌 Note
+
+This project was executed for academic and learning purposes as part of the Infosys Springboard Internship.
